@@ -1,89 +1,149 @@
-import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { useResetPassword } from '@/hooks/Authhooks/Authhook';
-import { ResetPassSchema, ResetPassSchemaType } from '@/lib/schems/ResetPassScheme';
-import { useAuthStore } from '@/store/AuthStore';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+'use client';
 
-export default function Step3({ onReset }: { onReset: () => void }) {
-  const { user } = useAuthStore();
-  const { mutate: resetPassword } = useResetPassword();
-  const form = useForm<ResetPassSchemaType>({
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { resetPasswordApi } from '@/lib/api/AuthApi';
+import { ResetPassSchema, ResetPassSchemaType } from '@/lib/schems/ResetPassScheme';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+
+interface Step3Props {
+  email: string;
+  onSuccess: () => void;
+  onBack: () => void;
+}
+
+export default function Step3({ email, onSuccess, onBack }: Step3Props) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<ResetPassSchemaType>({
     resolver: zodResolver(ResetPassSchema),
     defaultValues: {
-      email: user?.email || '',
-      newPassword: '',
-      confirmPassword: '',
+      email: email,
     },
   });
-  const onSubmit = (values: ResetPassSchemaType) => {
-    console.log(values);
-    resetPassword({
-      email: user?.email || '',
-      newPassword: values.newPassword,
-    });
+
+  const newPassword = watch('newPassword');
+
+  const onSubmit = async (data: ResetPassSchemaType) => {
+    if (data.confirmPassword && data.newPassword !== data.confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await resetPasswordApi({
+        email: data.email,
+        newPassword: data.newPassword,
+      });
+      toast.success('Password reset successfully!');
+      onSuccess();
+    } catch (error: unknown) {
+      const errorMessage =
+        error && typeof error === 'object' && 'response' in error
+          ? (error.response as { data?: { message?: string } })?.data?.message ||
+            'Failed to reset password'
+          : 'Failed to reset password';
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
-    <div>
-      <div className='mb-6 text-center'>
-        <div className='w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4'>
-          <svg
-            className='w-8 h-8 text-green-600'
-            fill='none'
-            stroke='currentColor'
-            viewBox='0 0 24 24'
-          >
-            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M5 13l4 4L19 7' />
-          </svg>
-        </div>
-        <h3 className='text-lg font-semibold text-gray-800 mb-2'>Code Verified!</h3>
-        <p className='text-sm text-gray-600'>Now you can set your new password</p>
-      </div>
+    <div className='space-y-6'>
+      <Button variant='outline' className='' onClick={onBack}>
+        <ArrowLeft className='w-4 h-4' />
+      </Button>
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
-          <FormField
-            control={form.control}
-            name='newPassword'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>New Password</FormLabel>
-                <FormControl>
-                  <Input {...field} type='password' placeholder='Enter new password' />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name='confirmPassword'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Confirm Password</FormLabel>
-                <FormControl>
-                  <Input {...field} type='password' placeholder='Confirm new password' />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <Button type='submit' className='w-full'>
-            Reset Password
-          </Button>
+      <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
+        <h2 className='text-2xl font-bold text-gray-800'>Create a new password</h2>
+        <p>Create a new strong password for your account.</p>
+        <input type='hidden' {...register('email')} />
 
-          <div className='text-center'>
-            <Button
+        <div className='space-y-2'>
+          <Label htmlFor='newPassword'>New Password</Label>
+          <div className='relative'>
+            <Input
+              id='newPassword'
+              type={showPassword ? 'text' : 'password'}
+              placeholder='Enter new password'
+              {...register('newPassword')}
+              className={errors.newPassword ? 'border-red-500 pr-10' : 'pr-10'}
+            />
+            <button
               type='button'
-              variant='link'
-              onClick={onReset}
-              className='text-gray-500 text-sm'
+              className='absolute inset-y-0 right-0 pr-3 flex items-center'
+              onClick={() => setShowPassword(!showPassword)}
             >
-              Back to Login
-            </Button>
+              {showPassword ? (
+                <EyeOff className='h-4 w-4 text-gray-400' />
+              ) : (
+                <Eye className='h-4 w-4 text-gray-400' />
+              )}
+            </button>
           </div>
-        </form>
-      </Form>
+          {errors.newPassword && (
+            <p className='text-red-500 text-sm'>{errors.newPassword.message}</p>
+          )}
+        </div>
+
+        <div className='space-y-2'>
+          <Label htmlFor='confirmPassword'>Confirm New Password</Label>
+          <div className='relative'>
+            <Input
+              id='confirmPassword'
+              type={showConfirmPassword ? 'text' : 'password'}
+              placeholder='Confirm new password'
+              {...register('confirmPassword', {
+                validate: value => value === newPassword || 'Passwords do not match',
+              })}
+              className={errors.confirmPassword ? 'border-red-500 pr-10' : 'pr-10'}
+            />
+            <button
+              type='button'
+              className='absolute inset-y-0 right-0 pr-3 flex items-center'
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? (
+                <EyeOff className='h-4 w-4 text-gray-400' />
+              ) : (
+                <Eye className='h-4 w-4 text-gray-400' />
+              )}
+            </button>
+          </div>
+          {errors.confirmPassword && (
+            <p className='text-red-500 text-sm'>{errors.confirmPassword.message}</p>
+          )}
+        </div>
+
+        {/* <div className='text-sm text-gray-600'>
+          <p>Password must:</p>
+          <ul className='list-disc list-inside mt-1 space-y-1'>
+            <li>Be at least 8 characters long</li>
+            <li>Contain uppercase and lowercase letters</li>
+            <li>Include at least one number</li>
+          </ul>
+        </div> */}
+
+        <div className='space-y-3'>
+          <Button type='submit' className='w-full bg-blue-600 text-white' disabled={isLoading}>
+            {isLoading ? 'Resetting...' : 'Reset Password'}
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import StepsGroup from '@/components/forms/forgotpassword/StepsGroup';
+import ForgotForm from '@/components/forms/forgotpassword/ForgotForm';
 import { AuthData } from '@/data/AuthData';
 import { FolderClosed } from 'lucide-react';
 
@@ -32,8 +32,8 @@ export default function ForgetPassword() {
       </div>
 
       {/* Form */}
-      <div className='flex  items-center justify-center'>
-        <StepsGroup />
+      <div className='flex items-center justify-center p-8'>
+        <ForgotForm />
       </div>
     </div>
   );

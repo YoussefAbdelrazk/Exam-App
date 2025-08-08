@@ -1,48 +1,71 @@
-import { Button } from '@/components/ui/button';
-import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { useForgetPassword } from '@/hooks/Authhooks/Authhook';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, useForm } from 'react-hook-form';
-import { z } from 'zod';
+'use client';
 
-const formSchema = z.object({
-  email: z.string().email(),
-});
-export default function Step1({ setStep }: { setStep: (step: number, email?: string) => void }) {
-  const { mutate: forgetPassword } = useForgetPassword();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: '',
-    },
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { forgetPasswordApi } from '@/lib/api/AuthApi';
+import { ForgotScheme, ForgotSchemeType } from '@/lib/schems/ForgotScheme';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+
+interface Step1Props {
+  onNext: (email: string) => void;
+}
+
+export default function Step1({ onNext }: Step1Props) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ForgotSchemeType>({
+    resolver: zodResolver(ForgotScheme),
   });
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-    forgetPassword(values);
-    setStep(2, values.email);
+
+  const onSubmit = async (data: ForgotSchemeType) => {
+    setIsLoading(true);
+    try {
+      await forgetPasswordApi(data);
+      toast.success('Reset code sent to your email!');
+      onNext(data.email);
+    } catch (error: unknown) {
+      const errorMessage =
+        error && typeof error === 'object' && 'response' in error
+          ? (error.response as { data?: { message?: string } })?.data?.message ||
+            'Failed to send reset code'
+          : 'Failed to send reset code';
+      toast.error(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   return (
-    <div className=''>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-          <FormField
-            control={form.control}
-            name='email'
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-              </FormItem>
-            )}
+    <div className='space-y-6'>
+      <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
+        <h2 className='text-2xl font-bold text-gray-800'>Forgot Password</h2>
+        <p className='text-gray-500'>Don’t worry, we will help you recover your account.</p>
+        <div className='space-y-2'>
+          <Label htmlFor='email'>Email Address</Label>
+          <Input
+            id='email'
+            type='email'
+            placeholder='Enter your email'
+            {...register('email')}
+            className={errors.email ? 'border-red-500' : ''}
           />
-          <Button type='submit' className='w-full'>
-            Submit
-          </Button>
-        </form>
-      </Form>
+          {errors.email && <p className='text-red-500 text-sm'>{errors.email.message}</p>}
+        </div>
+
+        <Button type='submit' className='w-full bg-blue-600 text-white' disabled={isLoading}>
+          {isLoading ? 'Sending...' : 'Send Reset Code'}
+          <ArrowRight className='w-4 h-4' />
+        </Button>
+      </form>
     </div>
   );
 }

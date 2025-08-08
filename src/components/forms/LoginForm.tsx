@@ -73,10 +73,8 @@ export default function LoginForm() {
                       placeholder='********'
                     />
                   </FormControl>
-                  <Button
+                  <button
                     type='button'
-                    variant='ghost'
-                    size='icon'
                     onClick={handleShowPassword}
                     className='absolute right-2 top-1/2 transform -translate-y-1/2'
                   >
@@ -85,7 +83,7 @@ export default function LoginForm() {
                     ) : (
                       <EyeOffIcon className='w-4 h-4' />
                     )}
-                  </Button>
+                  </button>
                 </div>
                 <FormMessage />
               </FormItem>

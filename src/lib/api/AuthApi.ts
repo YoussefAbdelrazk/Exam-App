@@ -36,6 +36,6 @@ export const verifyResetCodeApi = async (data: verifySchemaType) => {
 };
 
 export const resetPasswordApi = async (data: ResetPassSchemaType) => {
-  const response = await axiosInstance.post('/api/v1/auth/resetPassword', data);
+  const response = await axiosInstance.put('/api/v1/auth/resetPassword', data);
   return response.data;
 };
