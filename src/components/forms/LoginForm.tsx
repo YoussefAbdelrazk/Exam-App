@@ -33,6 +33,16 @@ export default function LoginForm() {
     setShowPassword(!showPassword);
   };
   const onSubmit = async (data: LoginSchemeType) => {
+    // try {
+    //   await signIn('credentials', {
+    //     email: data.email,
+    //     password: data.password,
+    //     redirect: false,
+    //   });
+    //   console.log(data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
     await toast.promise(login(data), {
       loading: 'Logging in...',
       success: 'Login successful',
@@ -95,7 +105,7 @@ export default function LoginForm() {
             </Button>
           </div>
           <Button disabled={isPending} type='submit' className='w-full bg-blue-600 text-white'>
-            Login
+            {isPending ? 'Logging in...' : 'Login'}
           </Button>
           <div className='flex justify-center mt-4'>
             <p className='text-gray-700 text-sm'>

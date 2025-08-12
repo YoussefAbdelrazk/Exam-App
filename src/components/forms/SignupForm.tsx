@@ -54,9 +54,7 @@ export default function SignupForm() {
         onSuccess: () => {
           toast.success('Signed up successfully');
         },
-        onError: () => {
-          toast.error('Failed to sign up');
-        },
+
       },
     );
   };

@@ -45,10 +45,12 @@ export default function Step1({ onNext }: Step1Props) {
   };
 
   return (
-    <div className='space-y-6'>
+    <div className='space-y-6 max-w-[720px]'>
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
         <h2 className='text-2xl font-bold text-gray-800'>Forgot Password</h2>
-        <p className='text-gray-500'>Don’t worry, we will help you recover your account.</p>
+        <p className='text-gray-500  max-w-[452px] '>
+          Don’t worry, we will help you recover your account.
+        </p>
         <div className='space-y-2'>
           <Label htmlFor='email'>Email Address</Label>
           <Input

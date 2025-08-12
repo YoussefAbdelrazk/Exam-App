@@ -8,4 +8,5 @@ export type User = {
   createdAt: string;
   isVerified: boolean;
   _id: string;
+
 };

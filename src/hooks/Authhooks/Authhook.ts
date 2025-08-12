@@ -1,6 +1,7 @@
 import {
   forgetPasswordApi,
   loginApi,
+  // loginApi,
   resetPasswordApi,
   signupApi,
   verifyResetCodeApi,
@@ -8,6 +9,7 @@ import {
 import { useAuthStore } from '@/store/AuthStore';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 export const useSignup = () => {
   const { setUser, setToken } = useAuthStore();
@@ -20,8 +22,12 @@ export const useSignup = () => {
       setToken(data.token);
       router.push('/login');
     },
-    onError: error => {
-      console.log(error);
+    onError: (error: unknown) => {
+      const errorMessage =
+        error && typeof error === 'object' && 'response' in error
+          ? (error.response as { data?: { message?: string } })?.data?.message || 'Signup failed'
+          : 'Signup failed';
+      toast.error(errorMessage);
     },
   });
 };
@@ -37,7 +43,12 @@ export const useLogin = () => {
       setToken(data.token);
       router.push('/');
     },
-    onError: error => {
+    onError: (error: unknown) => {
+      const errorMessage =
+        error && typeof error === 'object' && 'response' in error
+          ? (error.response as { data?: { message?: string } })?.data?.message || 'Login failed'
+          : 'Login failed';
+      toast.error(errorMessage);
       console.log(error);
     },
   });
