@@ -5,7 +5,7 @@ export default function middleware(req: NextRequest) {
   const isPublicRoute =
     pathname.startsWith('/login') ||
     pathname.startsWith('/signup') ||
-    pathname.startsWith('/forget-password');
+    pathname.startsWith('/forgot-password');
   const token = req.cookies.get('token');
   if (!isPublicRoute && !token) {
     return NextResponse.redirect(new URL('/login', req.url));
