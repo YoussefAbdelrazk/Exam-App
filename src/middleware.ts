@@ -10,6 +10,9 @@ export default function middleware(req: NextRequest) {
   if (!isPublicRoute && !token) {
     return NextResponse.redirect(new URL('/login', req.url));
   }
+  if (token && isPublicRoute) {
+    return NextResponse.redirect(new URL('/', req.url));
+  }
 }
 
 export const config = {
