@@ -15,7 +15,7 @@ const navigation = [
   },
   {
     name: 'Account Settings',
-    href: '/settings',
+    href: '/account',
     icon: User,
   },
 ];

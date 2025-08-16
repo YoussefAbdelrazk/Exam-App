@@ -10,12 +10,12 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-gray-50 flex'>
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main content */}
-      <div className='lg:pl-64'>
+      <div className='flex-1 lg:pl-64 flex flex-col h-screen overflow-hidden'>
         {/* Top navbar */}
         <Navbar />
 
@@ -23,7 +23,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <DynamicBreadcrumb />
 
         {/* Page content */}
-        <main className='p-6'>{children}</main>
+        <main className='flex-1 p-6 overflow-hidden font-geist-mono'>{children}</main>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { getToken } from '../ServerCookie';
+'use server';
+import { axiosInstance } from '@/lib/config';
+
 import { SubjectType } from '../types/SubjecetType';
-export const BaseUrl = process.env.NEXT_PUBLIC_BASE_URL!;
 
 interface SubjectResponse {
   message: string;
@@ -14,12 +14,8 @@ interface SubjectResponse {
 }
 
 export const getSubjects = async (page: number = 1): Promise<SubjectResponse> => {
-  const token = await getToken();
-  const response = await axios.get(`${BaseUrl}/api/v1/subjects?page=${page}&limit=10`, {
-    headers: {
-      token: `${token}`,
-    },
-  });
-  console.log('response', response);
+  const api = await axiosInstance();
+  const response = await api.get(`/api/v1/subjects?page=${page}&limit=10`, {});
+
   return response.data;
 };

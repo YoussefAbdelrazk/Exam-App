@@ -1,25 +1,29 @@
 import {
   forgetPasswordApi,
+  getUserApi,
   loginApi,
   // loginApi,
   resetPasswordApi,
   signupApi,
   verifyResetCodeApi,
 } from '@/lib/api/AuthApi';
-import { useAuthStore } from '@/store/AuthStore';
-import { useMutation } from '@tanstack/react-query';
+import { User } from '@/lib/types/UserType';
+
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
+interface GetUserResponse {
+  message: string;
+  user: User;
+}
 export const useSignup = () => {
-  const { setUser, setToken } = useAuthStore();
   const router = useRouter();
   return useMutation({
     mutationFn: signupApi,
     onSuccess: data => {
-      console.log(data);
-      setUser(data.user);
-      setToken(data.token);
+      console.log(data.user);
+
       router.push('/login');
     },
     onError: (error: unknown) => {
@@ -34,13 +38,12 @@ export const useSignup = () => {
 
 export const useLogin = () => {
   const router = useRouter();
-  const { setUser, setToken } = useAuthStore();
+
   return useMutation({
     mutationFn: loginApi,
     onSuccess: data => {
-      console.log(data);
-      setUser(data.user);
-      setToken(data.token);
+      console.log('data.user', data.user);
+
       router.push('/');
     },
     onError: (error: unknown) => {
@@ -89,5 +92,12 @@ export const useResetPassword = () => {
     onError: error => {
       console.log(error);
     },
+  });
+};
+
+export const useGetUser = () => {
+  return useQuery<GetUserResponse>({
+    queryKey: ['user'],
+    queryFn: () => getUserApi(),
   });
 };

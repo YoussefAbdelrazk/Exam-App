@@ -1,10 +1,9 @@
 import DiplomasList from '@/components/diplomas/DiplomasList';
 import DashboardLayout from '@/components/layout/DashboardLayout';
+import Header from '@/components/layout/Header';
 import Loading from '@/components/loading';
-import { GraduationCap } from 'lucide-react';
 import { Suspense } from 'react';
 
-//   {
 //     id: 1,
 //     title: 'Flutter Development',
 //     image: '/api/placeholder/300/200',
@@ -52,14 +51,7 @@ export default function DiplomasPage() {
   return (
     <DashboardLayout>
       <div className='space-y-6'>
-        {/* Header */}
-        <div className='bg-blue-600 rounded-lg p-8 text-white'>
-          <div className='flex items-center space-x-3'>
-            <GraduationCap className='h-8 w-8' />
-            <h1 className='text-3xl font-bold font-geist-mono'>Diplomas</h1>
-          </div>
-        </div>
-
+        <Header title='Diplomas' />
         {/* Diplomas Grid */}
         <Suspense fallback={<Loading />}>
           <DiplomasList />
