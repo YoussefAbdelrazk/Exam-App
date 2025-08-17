@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useGetUser } from '@/hooks/Authhooks/Authhook';
+import { useEditProfile } from '@/hooks/Userhooks/Userhook';
 import { profileSchema, type ProfileFormData } from '@/lib/schems/ProfileScheme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
@@ -19,6 +20,7 @@ import { toast } from 'sonner';
 
 export default function ProfileForm() {
   const { data: userData } = useGetUser();
+  const { mutateAsync: editProfile } = useEditProfile();
   console.log('userData', userData);
 
   const form = useForm<ProfileFormData>({
@@ -46,12 +48,16 @@ export default function ProfileForm() {
   const onSubmit = async (data: ProfileFormData) => {
     try {
       // Here you would typically make an API call to update the user profile
+      await toast.promise(editProfile(data), {
+        loading: 'Updating profile...',
+        success: 'Profile updated successfully!',
+        error: 'Failed to update profile. Please try again.',
+      });
       console.log('Updating profile:', data);
 
       // Update local user state (you might want to update this based on API response)
 
       // Show success message
-      toast.success('Profile updated successfully!');
     } catch (error) {
       console.error('Error updating profile:', error);
       toast.error('Failed to update profile. Please try again.');

@@ -7,6 +7,7 @@ import {
   signupApi,
   verifyResetCodeApi,
 } from '@/lib/api/AuthApi';
+import { LoginSchemeType } from '@/lib/schems/LoginScheme';
 import { User } from '@/lib/types/UserType';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -37,14 +38,10 @@ export const useSignup = () => {
 };
 
 export const useLogin = () => {
-  const router = useRouter();
-
   return useMutation({
-    mutationFn: loginApi,
-    onSuccess: data => {
-      console.log('data.user', data.user);
-
-      router.push('/');
+    mutationFn: (data: LoginSchemeType) => loginApi(data),
+    onSuccess: () => {
+      window.location.href = new URLSearchParams(window.location.search).get('callbackUrl') || '/';
     },
     onError: (error: unknown) => {
       const errorMessage =

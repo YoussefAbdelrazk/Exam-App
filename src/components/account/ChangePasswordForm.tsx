@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { useChangePassword } from '@/hooks/Userhooks/Userhook';
 import {
   changePasswordSchema,
   type ChangePasswordFormData,
@@ -27,13 +28,13 @@ export default function ChangePasswordForm() {
     new: false,
     confirm: false,
   });
-
+  const { mutateAsync: changePassword } = useChangePassword();
   const form = useForm<ChangePasswordFormData>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: '',
+      oldPassword: '',
+      password: '',
+      rePassword: '',
     },
   });
 
@@ -46,17 +47,14 @@ export default function ChangePasswordForm() {
 
   const onSubmit = async (data: ChangePasswordFormData) => {
     try {
-      // Here you would typically make an API call to update the password
-      console.log('Updating password:', data);
-
-      // Show success message
-      toast.success('Password updated successfully!');
-
-      // Reset form after successful submission
-      form.reset();
+      console.log(data);
+      await toast.promise(changePassword(data), {
+        loading: 'Updating password...',
+        success: 'Password updated successfully!',
+        error: 'Failed to update password. Please try again.',
+      });
     } catch (error) {
       console.error('Error updating password:', error);
-      toast.error('Failed to update password. Please try again.');
     }
   };
 
@@ -66,7 +64,7 @@ export default function ChangePasswordForm() {
         <form className='space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
-            name='currentPassword'
+            name='oldPassword'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Current Password</FormLabel>
@@ -98,7 +96,7 @@ export default function ChangePasswordForm() {
 
           <FormField
             control={form.control}
-            name='newPassword'
+            name='password'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>New Password</FormLabel>
@@ -133,7 +131,7 @@ export default function ChangePasswordForm() {
 
           <FormField
             control={form.control}
-            name='confirmPassword'
+            name='rePassword'
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Confirm New Password</FormLabel>
