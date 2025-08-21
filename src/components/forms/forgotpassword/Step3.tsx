@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { resetPasswordApi } from '@/lib/api/AuthApi';
+import { resetPasswordApi } from '@/lib/api/auth/AuthApi';
 import { ResetPassSchema, ResetPassSchemaType } from '@/lib/schems/ResetPassScheme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react';

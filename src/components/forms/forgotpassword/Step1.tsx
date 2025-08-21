@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { forgetPasswordApi } from '@/lib/api/AuthApi';
+import { forgetPasswordApi } from '@/lib/api/auth/AuthApi';
 import { ForgotScheme, ForgotSchemeType } from '@/lib/schems/ForgotScheme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight } from 'lucide-react';

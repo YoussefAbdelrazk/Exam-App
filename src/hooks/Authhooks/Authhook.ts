@@ -1,12 +1,12 @@
 import {
   forgetPasswordApi,
-  getUserApi,
   loginApi,
   // loginApi,
   resetPasswordApi,
   signupApi,
   verifyResetCodeApi,
-} from '@/lib/api/AuthApi';
+} from '@/lib/api/auth/AuthApi';
+import { getUserApi } from '@/lib/api/User/GetUser';
 import { LoginSchemeType } from '@/lib/schems/LoginScheme';
 import { User } from '@/lib/types/UserType';
 

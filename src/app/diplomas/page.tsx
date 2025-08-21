@@ -2,6 +2,7 @@ import DiplomasList from '@/components/diplomas/DiplomasList';
 import DashboardLayout from '@/components/layout/DashboardLayout';
 import Header from '@/components/layout/Header';
 import Loading from '@/components/loading';
+import { BookOpen } from 'lucide-react';
 import { Suspense } from 'react';
 
 //     id: 1,
@@ -50,8 +51,8 @@ import { Suspense } from 'react';
 export default function DiplomasPage() {
   return (
     <DashboardLayout>
-      <div className='space-y-6'>
-        <Header title='Diplomas' />
+      <div className='space-y-6 font-geist-mono'>
+        <Header title='Diplomas' icon={<BookOpen className='h-8 w-8' />} />
         {/* Diplomas Grid */}
         <Suspense fallback={<Loading />}>
           <DiplomasList />

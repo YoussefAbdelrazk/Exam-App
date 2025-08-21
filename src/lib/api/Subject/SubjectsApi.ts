@@ -1,7 +1,6 @@
-'use server';
 import { axiosInstance } from '@/lib/config';
 
-import { SubjectType } from '../types/SubjecetType';
+import { SubjectType } from '../../types/SubjecetType';
 
 interface SubjectResponse {
   message: string;

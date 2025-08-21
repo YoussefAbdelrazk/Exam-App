@@ -1,6 +1,5 @@
-'use server';
 import { axiosInstance, BaseUrl } from '@/lib/config';
-import { ExamQuestionsResponse, ExamResponse } from '../types/ExamType';
+import { ExamQuestionsResponse, ExamResponse } from '@/lib/types/ExamType';
 
 export const getExamsBySubject = async (
   subjectId: string,

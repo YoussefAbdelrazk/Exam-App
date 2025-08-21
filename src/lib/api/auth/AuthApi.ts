@@ -46,10 +46,3 @@ export const resetPasswordApi = async (data: ResetPassSchemaType) => {
   const response = await api.put('/api/v1/auth/resetPassword', data);
   return response.data;
 };
-
-export const getUserApi = async () => {
-  const api = await axiosInstance();
-  const response = await api.get('/api/v1/auth/profileData');
-  console.log('response', response.data);
-  return response.data;
-};

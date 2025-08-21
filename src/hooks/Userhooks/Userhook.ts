@@ -1,4 +1,4 @@
-import { changePasswordApi, editProfileApi } from '@/lib/api/UserApi';
+import { changePasswordApi, editProfileApi } from '@/lib/api/User/UserApi';
 import { ChangePasswordFormData } from '@/lib/schems/ChangePasswordScheme';
 import { ProfileFormData } from '@/lib/schems/ProfileScheme';
 import { useMutation } from '@tanstack/react-query';

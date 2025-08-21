@@ -1,6 +1,6 @@
 'use client';
 
-import { getExamQuestions, getExamsBySubject } from '@/lib/api/ExamsApi';
+import { getExamQuestions, getExamsBySubject } from '@/lib/api/Exam/ExamsApi';
 import { ExamType } from '@/lib/types/ExamType';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 

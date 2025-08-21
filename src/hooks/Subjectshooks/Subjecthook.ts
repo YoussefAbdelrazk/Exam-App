@@ -1,6 +1,6 @@
 'use client';
 
-import { getSubjects } from '@/lib/api/SubjectsApi';
+import { getSubjects } from '@/lib/api/Subject/SubjectsApi';
 import { SubjectType } from '@/lib/types/SubjecetType';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
