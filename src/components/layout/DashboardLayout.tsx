@@ -23,7 +23,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         <DynamicBreadcrumb />
 
         {/* Page content */}
-        <main className='flex-1 p-6 overflow-hidden font-geist-mono'>{children}</main>
+        <main
+          id='scrollableDiv'
+          className='flex-1 p-6 overflow-auto font-geist-mono'
+          style={{ height: 'calc(100vh - 120px)' }}
+        >
+          {children}
+        </main>
       </div>
     </div>
   );

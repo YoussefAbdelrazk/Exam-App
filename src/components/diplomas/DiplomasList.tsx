@@ -8,6 +8,7 @@ export default function DiplomasList() {
   const { data, fetchNextPage, hasNextPage, isLoading, error } = useGetSubjects();
 
   const allSubjects = data?.pages.flatMap(page => page.subjects) || [];
+  console.log(allSubjects);
 
   const loadMore = () => {
     if (hasNextPage && !isLoading) {
@@ -40,6 +41,7 @@ export default function DiplomasList() {
           </div>
         }
         scrollThreshold='100px'
+        scrollableTarget='scrollableDiv'
       >
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
           {allSubjects.map((subject: SubjectType) => (
