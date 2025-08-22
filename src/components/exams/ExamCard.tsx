@@ -14,7 +14,6 @@ export default function ExamCard({ exam, onStartExam }: ExamCardProps) {
     if (onStartExam) {
       onStartExam(exam._id);
     } else {
-      // Navigate to exam page
       router.push(`/exam/${exam._id}`);
     }
   };
@@ -59,7 +58,7 @@ export default function ExamCard({ exam, onStartExam }: ExamCardProps) {
           }`}
         >
           <Play className='h-4 w-4' />
-          <span className='font-geist-mono'>{exam.active ? 'Start Exam' : 'Exam Unavailable'}</span>
+          <span>{exam.active ? 'Start Exam' : 'Exam Unavailable'}</span>
         </button>
       </div>
     </div>
