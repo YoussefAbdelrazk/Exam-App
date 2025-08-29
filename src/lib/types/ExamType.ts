@@ -47,3 +47,24 @@ export interface ExamQuestionsResponse {
   message: string;
   questions: Question[];
 }
+
+// New types for question checking
+export interface QuestionSubmission {
+  questionId: string;
+  selectedAnswer: string;
+}
+
+export interface CheckQuestionsRequest {
+  examId: string;
+  submissions: QuestionSubmission[];
+}
+
+export interface QuestionAnswer {
+  questionId: string;
+  correct: string;
+}
+
+export interface CheckQuestionsResponse {
+  answers: QuestionAnswer[];
+  time: number;
+}

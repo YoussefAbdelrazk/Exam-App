@@ -41,11 +41,11 @@ export default function QuestionCard({
   return (
     <div className='min-h-screen bg-gray-50'>
       {/* Breadcrumbs */}
-      <div className='max-w-6xl mx-auto p-6'>
+      <div className='max-w-6xl mx-auto p-3'>
         {/* Header */}
         <Header title={examTitle} icon={<CircleQuestionMark />} />
 
-        <div className='flex items-center justify-between text-gray-500 mt-12'>
+        <div className='flex items-center justify-between text-gray-500 mt-8'>
           <div className='text-sm  mb-4'> {examTitle} </div>
           <div className='text-right mb-6'>
             <span className='text-lg font-medium '>

@@ -18,8 +18,6 @@ export const loginApi = async (data: LoginSchemeType) => {
   const api = await axiosInstance();
   const response = await api.post('/api/v1/auth/signin', data);
   await setToken(response.data.token);
-  console.log('response.data.token', response.data.token);
-  console.log(response.data);
   return response.data;
 };
 

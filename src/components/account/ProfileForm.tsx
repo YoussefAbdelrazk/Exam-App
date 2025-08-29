@@ -21,7 +21,6 @@ import { toast } from 'sonner';
 export default function ProfileForm() {
   const { data: userData } = useGetUser();
   const { mutateAsync: editProfile } = useEditProfile();
-  console.log('userData', userData);
 
   const form = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
@@ -53,7 +52,6 @@ export default function ProfileForm() {
         success: 'Profile updated successfully!',
         error: 'Failed to update profile. Please try again.',
       });
-      console.log('Updating profile:', data);
 
       // Update local user state (you might want to update this based on API response)
 
@@ -66,7 +64,6 @@ export default function ProfileForm() {
 
   const handleDeleteAccount = () => {
     // Handle delete account logic
-    console.log('Deleting account');
   };
 
   return (

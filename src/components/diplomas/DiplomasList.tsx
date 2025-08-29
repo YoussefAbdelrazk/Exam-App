@@ -8,7 +8,6 @@ export default function DiplomasList() {
   const { data, fetchNextPage, hasNextPage, isLoading, error } = useGetSubjects();
 
   const allSubjects = data?.pages.flatMap(page => page.subjects) || [];
-  console.log(allSubjects);
 
   const loadMore = () => {
     if (hasNextPage && !isLoading) {

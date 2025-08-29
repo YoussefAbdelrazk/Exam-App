@@ -1,8 +1,13 @@
 'use client';
 
-import { getExamQuestions, getExamsBySubject } from '@/lib/api/Exam/ExamsApi';
-import { ExamType } from '@/lib/types/ExamType';
+import {
+  checkQuestions as checkQuestionsApi,
+  getExamQuestions,
+  getExamsBySubject,
+} from '@/lib/api/Exam/ExamsApi';
+import { CheckQuestionsRequest, CheckQuestionsResponse, ExamType } from '@/lib/types/ExamType';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 
 interface ResponseType {
   message: string;
@@ -51,5 +56,38 @@ export const useGetExamQuestions = (examId: string) => {
     examInfo: data?.questions?.[0]?.exam,
     isLoading,
     error,
+  };
+};
+
+export const useCheckQuestions = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [results, setResults] = useState<CheckQuestionsResponse | null>(null);
+
+  const checkQuestions = async (data: CheckQuestionsRequest) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await checkQuestionsApi(data);
+      setResults(response);
+      return response;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to check questions';
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return {
+    checkQuestions,
+    isLoading,
+    error,
+    results,
+    reset: () => {
+      setError(null);
+      setResults(null);
+    },
   };
 };

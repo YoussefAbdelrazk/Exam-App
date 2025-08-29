@@ -14,7 +14,6 @@ import { ChevronDown, Loader2 } from 'lucide-react';
 export default function Navbar() {
   // const { user } = useUser();
   const { data: userData, isLoading } = useGetUser();
-  console.log(userData);
   // const router = useRouter();
 
   // const handleLogout = () => {

@@ -47,7 +47,6 @@ export default function ChangePasswordForm() {
 
   const onSubmit = async (data: ChangePasswordFormData) => {
     try {
-      console.log(data);
       await toast.promise(changePassword(data), {
         loading: 'Updating password...',
         success: 'Password updated successfully!',

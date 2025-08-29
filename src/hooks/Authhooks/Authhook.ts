@@ -22,9 +22,7 @@ export const useSignup = () => {
   const router = useRouter();
   return useMutation({
     mutationFn: signupApi,
-    onSuccess: data => {
-      console.log(data.user);
-
+    onSuccess: () => {
       router.push('/login');
     },
     onError: (error: unknown) => {
@@ -49,7 +47,6 @@ export const useLogin = () => {
           ? (error.response as { data?: { message?: string } })?.data?.message || 'Login failed'
           : 'Login failed';
       toast.error(errorMessage);
-      console.log(error);
     },
   });
 };
@@ -57,24 +54,16 @@ export const useLogin = () => {
 export const useForgetPassword = () => {
   return useMutation({
     mutationFn: forgetPasswordApi,
-    onSuccess: data => {
-      console.log(data);
-    },
-    onError: error => {
-      console.log(error);
-    },
+    onSuccess: () => {},
+    onError: () => {},
   });
 };
 
 export const useVerifyResetCode = () => {
   return useMutation({
     mutationFn: verifyResetCodeApi,
-    onSuccess: data => {
-      console.log(data);
-    },
-    onError: error => {
-      console.log(error);
-    },
+    onSuccess: () => {},
+    onError: () => {},
   });
 };
 
@@ -82,13 +71,10 @@ export const useResetPassword = () => {
   const router = useRouter();
   return useMutation({
     mutationFn: resetPasswordApi,
-    onSuccess: data => {
-      console.log(data);
+    onSuccess: () => {
       router.push('/login');
     },
-    onError: error => {
-      console.log(error);
-    },
+    onError: () => {},
   });
 };
 

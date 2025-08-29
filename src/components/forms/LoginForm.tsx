@@ -33,22 +33,11 @@ export default function LoginForm() {
     setShowPassword(!showPassword);
   };
   const onSubmit = async (data: LoginSchemeType) => {
-    // try {
-    //   await signIn('credentials', {
-    //     email: data.email,
-    //     password: data.password,
-    //     redirect: false,
-    //   });
-    //   console.log(data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
     await toast.promise(login(data), {
       loading: 'Logging in...',
       success: 'Login successful',
       error: 'Login failed',
     });
-
   };
 
   return (
