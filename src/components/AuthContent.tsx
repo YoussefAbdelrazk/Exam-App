@@ -3,7 +3,7 @@ import { FolderClosed } from 'lucide-react';
 
 export default function AuthContent() {
   return (
-    <div className='bg-[#EFF6FFBF] to-blue-200 flex flex-col py-[116px] items-center px-10 relative'>
+    <div className='bg-[#EFF6FFBF] to-blue-200 flex flex-col py-[70px] items-center px-10 relative'>
       <div className='flex flex-col max-w-md '>
         <h1 className='text-xl font-semibold text-blue-600 capitalize flex items-center gap-2'>
           <FolderClosed className='size-7' />

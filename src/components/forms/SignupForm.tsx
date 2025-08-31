@@ -16,48 +16,50 @@ import { Input } from '@/components/ui/input';
 import { useSignup } from '@/hooks/Authhooks/Authhook';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
+
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
   const { mutate: signup } = useSignup();
-  // const router = useRouter();
-  const form = useForm<SignupSchemeType>({
-    resolver: zodResolver(SignupScheme),
-    defaultValues: {
-      username: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      rePassword: '',
-      phone: '',
-    },
-  });
-
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const onSubmit = async (data: SignupSchemeType) => {
-    signup(
-      {
-        username: data.username,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        password: data.password,
-        rePassword: data.rePassword,
-        phone: data.phone,
+    const router = useRouter();
+    const form = useForm<SignupSchemeType>({
+      resolver: zodResolver(SignupScheme),
+      defaultValues: {
+        username: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        rePassword: '',
+        phone: '',
       },
-      {
-        onSuccess: () => {
-          toast.success('Signed up successfully');
+    });
+
+    const handleShowPassword = () => {
+      setShowPassword(!showPassword);
+    };
+
+    const onSubmit = async (data: SignupSchemeType) => {
+      signup(
+        {
+          username: data.username,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          password: data.password,
+          rePassword: data.rePassword,
+          phone: data.phone,
         },
-
-      },
-    );
-  };
+        {
+          onSuccess: () => {
+            router.push('/login');
+            toast.success('Signed up successfully');
+          },
+        },
+      );
+    };
 
   return (
     <div className='w-full max-w-md mx-auto py-6 px-6'>

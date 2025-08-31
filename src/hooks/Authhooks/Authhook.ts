@@ -1,4 +1,5 @@
 import {
+  deleteAccountApi,
   forgetPasswordApi,
   loginApi,
   // loginApi,
@@ -8,6 +9,7 @@ import {
 } from '@/lib/api/auth/AuthApi';
 import { getUserApi } from '@/lib/api/User/GetUser';
 import { LoginSchemeType } from '@/lib/schems/LoginScheme';
+import { deleteToken } from '@/lib/ServerCookie';
 import { User } from '@/lib/types/UserType';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -82,5 +84,20 @@ export const useGetUser = () => {
   return useQuery<GetUserResponse>({
     queryKey: ['user'],
     queryFn: () => getUserApi(),
+  });
+};
+
+export const useDeleteAccount = () => {
+  const router = useRouter();
+  return useMutation({
+    mutationFn: () => deleteAccountApi(),
+    onSuccess: () => {
+      toast.success('Account deleted successfully');
+      deleteToken();
+      router.push('/login');
+    },
+    onError: () => {
+      toast.error('Failed to delete account');
+    },
   });
 };

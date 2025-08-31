@@ -17,3 +17,8 @@ export async function setToken(token: string) {
     path: '/',
   });
 }
+
+export async function deleteToken() {
+  const cookieStore = await cookies();
+  cookieStore.delete('token');
+}

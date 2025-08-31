@@ -1,4 +1,3 @@
-'use server';
 import { axiosInstance } from '@/lib/config';
 import { ForgotSchemeType } from '@/lib/schems/ForgotScheme';
 import { LoginSchemeType } from '@/lib/schems/LoginScheme';
@@ -42,5 +41,11 @@ export const verifyResetCodeApi = async (data: verifySchemaType) => {
 export const resetPasswordApi = async (data: ResetPassSchemaType) => {
   const api = await axiosInstance();
   const response = await api.put('/api/v1/auth/resetPassword', data);
+  return response.data;
+};
+
+export const deleteAccountApi = async () => {
+  const api = await axiosInstance();
+  const response = await api.delete('/api/v1/auth/deleteMe');
   return response.data;
 };

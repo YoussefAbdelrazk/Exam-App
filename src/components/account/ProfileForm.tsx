@@ -10,18 +10,19 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useGetUser } from '@/hooks/Authhooks/Authhook';
+import { useDeleteAccount, useGetUser } from '@/hooks/Authhooks/Authhook';
 import { useEditProfile } from '@/hooks/Userhooks/Userhook';
 import { profileSchema, type ProfileFormData } from '@/lib/schems/ProfileScheme';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import DeleteAccountDialog from './DeleteAccountDialog';
 
 export default function ProfileForm() {
   const { data: userData } = useGetUser();
   const { mutateAsync: editProfile } = useEditProfile();
-
+  const { mutate: deleteAccount } = useDeleteAccount();
   const form = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
@@ -62,8 +63,9 @@ export default function ProfileForm() {
     }
   };
 
-  const handleDeleteAccount = () => {
-    // Handle delete account logic
+  const handleDeleteAccount = async (): Promise<void> => {
+    await deleteAccount();
+    // window.location.reload();
   };
 
   return (
@@ -152,14 +154,7 @@ export default function ProfileForm() {
           />
 
           <div className='flex items-center gap-3 pt-4'>
-            <Button
-              type='button'
-              variant='destructive'
-              onClick={handleDeleteAccount}
-              className='px-6 bg-red-50 text-red-600 w-[331px]'
-            >
-              Delete My Account
-            </Button>
+            <DeleteAccountDialog onDeleteAccount={handleDeleteAccount} />
 
             <Button
               type='submit'
