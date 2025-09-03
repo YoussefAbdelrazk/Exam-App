@@ -14,8 +14,7 @@ export default function ExamPageClient() {
   const { questions, examInfo, isLoading, error } = useGetExamQuestions(examId);
 
   const handleExamComplete = () => {
-    // Exam is now complete and results are shown in the ExamForm component
-    // The ExamForm component will handle showing results
+
   };
 
   const handleGoBack = () => {

@@ -99,7 +99,6 @@ export default function ExamForm({
 
   const handleNext = () => {
     if (currentQuestionIndex === questions.length - 1) {
-      // Last question, show summary
       setShowSummary(true);
     } else {
       setCurrentQuestionIndex(prev => prev + 1);
@@ -117,7 +116,6 @@ export default function ExamForm({
     setExamStartTime(Date.now());
   };
 
-  // Show results if exam is submitted and we have results
   if (examSubmitted && results) {
     return (
       <ExamResults

@@ -40,9 +40,7 @@ export default function QuestionCard({
 
   return (
     <div className='min-h-screen bg-gray-50'>
-      {/* Breadcrumbs */}
       <div className='max-w-6xl mx-auto p-3'>
-        {/* Header */}
         <Header title={examTitle} icon={<CircleQuestionMark />} />
 
         <div className='flex items-center justify-between text-gray-500 mt-8'>
@@ -54,14 +52,11 @@ export default function QuestionCard({
           </div>
         </div>
 
-        {/* Question Card */}
         <div className='bg-white rounded-lg shadow-lg p-8 mb-6 relative'>
-          {/* Question */}
           <h2 className='text-2xl font-semibold text-blue-600 mb-8 pr-16 font-geist-mono'>
             {question.question}
           </h2>
 
-          {/* Answer Options */}
           <div className='space-y-4 mb-8'>
             {question.answers.map((answer: Answer) => (
               <label
@@ -95,7 +90,6 @@ export default function QuestionCard({
           </div>
         </div>
 
-        {/* Navigation and Timer */}
         <div className='bg-white rounded-lg shadow-lg p-6'>
           <div className='flex items-center gap-4 justify-between'>
             <button
@@ -111,13 +105,11 @@ export default function QuestionCard({
               <span>Previous</span>
             </button>
 
-            {/* Timer */}
             <div className='flex items-center space-x-2 bg-blue-100 p-3 rounded-full'>
               <Clock className='h-5 w-5 text-blue-600' />
               <span className='text-blue-600 font-bold text-lg'>{formatTime(timeLeft)}</span>
             </div>
 
-            {/* Next/Submit Button */}
             <button
               onClick={onNext}
               className='px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center space-x-2 w-full justify-center'
