@@ -40,6 +40,7 @@ export default function ExamsList({ subjectId, onStartExam }: ExamsListProps) {
   if (allExams.length === 0) {
     return (
       <div className='text-center py-12'>
+        {/* svg */}
         <div className='text-gray-400 mb-4'>
           <svg className='mx-auto h-12 w-12' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
             <path
@@ -50,9 +51,11 @@ export default function ExamsList({ subjectId, onStartExam }: ExamsListProps) {
             />
           </svg>
         </div>
+        {/* title */}
         <h3 className='text-lg font-medium text-gray-900 font-geist-mono mb-2'>
           No Exams Available
         </h3>
+        {/* description */}
         <p className='text-gray-500 font-geist-sans'>
           There are no exams available for this subject yet.
         </p>
@@ -62,6 +65,7 @@ export default function ExamsList({ subjectId, onStartExam }: ExamsListProps) {
 
   return (
     <div className='w-full'>
+      {/* infinite scroll */}
       <InfiniteScroll
         dataLength={allExams.length}
         next={loadMore}

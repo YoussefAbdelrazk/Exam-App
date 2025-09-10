@@ -59,14 +59,19 @@ export default function ChangePasswordForm() {
 
   return (
     <div className='max-w-2xl mx-auto p-6'>
+      {/* form */}
       <Form {...form}>
+        {/* form */}
         <form className='space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
+          {/* current password */}
           <FormField
             control={form.control}
             name='oldPassword'
             render={({ field }) => (
               <FormItem>
+                {/* label */}
                 <FormLabel>Current Password</FormLabel>
+                {/* input */}
                 <FormControl>
                   <div className='relative'>
                     <Input
@@ -75,6 +80,7 @@ export default function ChangePasswordForm() {
                       className='pr-10'
                       {...field}
                     />
+                    {/* show password button */}
                     <button
                       type='button'
                       onClick={() => togglePasswordVisibility('current')}
@@ -93,12 +99,15 @@ export default function ChangePasswordForm() {
             )}
           />
 
+          {/* new password */}
           <FormField
             control={form.control}
             name='password'
             render={({ field }) => (
               <FormItem>
+                {/* label */}
                 <FormLabel>New Password</FormLabel>
+                {/* input */}
                 <FormControl>
                   <div className='relative'>
                     <Input
@@ -107,6 +116,7 @@ export default function ChangePasswordForm() {
                       className='pr-10'
                       {...field}
                     />
+                    {/* show password button */}
                     <button
                       type='button'
                       onClick={() => togglePasswordVisibility('new')}
@@ -120,20 +130,25 @@ export default function ChangePasswordForm() {
                     </button>
                   </div>
                 </FormControl>
+                {/* description */}
                 <FormDescription>
                   Password must be at least 8 characters with uppercase, lowercase, and number
                 </FormDescription>
+                {/* error message */}
                 <FormMessage />
               </FormItem>
             )}
           />
 
+          {/* confirm new password */}
           <FormField
             control={form.control}
             name='rePassword'
             render={({ field }) => (
               <FormItem>
+                {/* label */}
                 <FormLabel>Confirm New Password</FormLabel>
+                {/* input */}
                 <FormControl>
                   <div className='relative'>
                     <Input
@@ -142,6 +157,7 @@ export default function ChangePasswordForm() {
                       className='pr-10'
                       {...field}
                     />
+                    {/* show password button */}
                     <button
                       type='button'
                       onClick={() => togglePasswordVisibility('confirm')}
@@ -155,12 +171,15 @@ export default function ChangePasswordForm() {
                     </button>
                   </div>
                 </FormControl>
+                {/* error message */}
                 <FormMessage />
               </FormItem>
             )}
           />
 
+          {/* update password button */}
           <div className='pt-4'>
+            {/* button */}
             <Button
               type='submit'
               disabled={form.formState.isSubmitting}

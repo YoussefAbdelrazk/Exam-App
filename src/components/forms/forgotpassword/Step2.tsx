@@ -96,17 +96,21 @@ export default function Step2({ email, onNext, onBack }: Step2Props) {
   return (
     <div className='space-y-6'>
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-6'>
+        {/* back button */}
         <Button variant='outline' className='' onClick={onBack}>
           <ArrowLeft className='w-4 h-4' />
         </Button>
+        {/* title */}
         <h2 className='text-2xl font-bold text-gray-800'>Verify OTP</h2>
         <p className='text-gray-500 mt-2'>
           We&apos;ve sent a 6-digit code to <strong>{email}</strong>
         </p>
         <div className='space-y-4'>
+          {/* enter verification code */}
           <Label htmlFor='otp' className='text-center block'>
             Enter Verification Code
           </Label>
+          {/* otp input */}
           <div className='flex justify-center'>
             <InputOTP maxLength={6} value={otpValue} onChange={handleOtpChange}>
               <InputOTPGroup>
@@ -119,6 +123,7 @@ export default function Step2({ email, onNext, onBack }: Step2Props) {
               </InputOTPGroup>
             </InputOTP>
           </div>
+          {/* resend code */}
           <div className='text-center mt-4'>
             {!canResend ? (
               <p className='text-sm text-gray-500'>
@@ -137,26 +142,19 @@ export default function Step2({ email, onNext, onBack }: Step2Props) {
               </Button>
             )}
           </div>
+          {/* error message */}
           {errors.resetCode && (
             <p className='text-red-500 text-sm text-center'>{errors.resetCode.message}</p>
           )}
         </div>
 
+        {/* verify code button */}
         <div className='space-y-3'>
           <Button type='submit' className='w-full bg-blue-600 text-white' disabled={isLoading}>
             {isLoading ? 'Verifying...' : 'Verify Code'}
           </Button>
         </div>
       </form>
-
-      {/* <div className='text-center'>
-        <p className='text-sm text-gray-600'>
-          Didn&apos;t receive the code?{' '}
-          <button type='button' className='text-blue-600 hover:underline' onClick={onBack}>
-            Try again
-          </button>
-        </p>
-      </div> */}
     </div>
   );
 }

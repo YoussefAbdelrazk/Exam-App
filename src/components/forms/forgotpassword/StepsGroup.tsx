@@ -30,11 +30,9 @@ export default function StepsGroup() {
   };
 
   const handleStep3Success = () => {
-
     router.push('/login');
   };
 
-  // const renderProgressBar = () => {
   //   return (
   //     <div className='mb-8'>
   //       <div className='flex items-center justify-between mb-2'>
@@ -57,8 +55,6 @@ export default function StepsGroup() {
 
   return (
     <div className='max-w-xl mx-auto'>
-      {/* {renderProgressBar()} */}
-
       <div className=''>
         {currentStep === 1 && <Step1 onNext={handleStep1Next} />}
 

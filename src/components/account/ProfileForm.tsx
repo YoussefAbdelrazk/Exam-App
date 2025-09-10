@@ -70,9 +70,12 @@ export default function ProfileForm() {
 
   return (
     <div className='max-w-2xl mx-auto p-6'>
+      {/* form */}
       <Form {...form}>
+        {/* form */}
         <form className='space-y-6 font-geist-mono' onSubmit={form.handleSubmit(onSubmit)}>
           <div className='grid grid-cols-2 gap-4'>
+            {/* first name */}
             <FormField
               control={form.control}
               name='firstName'
@@ -86,6 +89,7 @@ export default function ProfileForm() {
                 </FormItem>
               )}
             />
+            {/* last name */}
             <FormField
               control={form.control}
               name='lastName'
@@ -101,6 +105,7 @@ export default function ProfileForm() {
             />
           </div>
 
+          {/* username */}
           <FormField
             control={form.control}
             name='username'
@@ -115,6 +120,7 @@ export default function ProfileForm() {
             )}
           />
 
+          {/* email */}
           <FormField
             control={form.control}
             name='email'
@@ -129,6 +135,7 @@ export default function ProfileForm() {
             )}
           />
 
+          {/* phone */}
           <FormField
             control={form.control}
             name='phone'
@@ -153,9 +160,11 @@ export default function ProfileForm() {
             )}
           />
 
+          {/* delete account */}
           <div className='flex items-center gap-3 pt-4'>
             <DeleteAccountDialog onDeleteAccount={handleDeleteAccount} />
 
+            {/* save changes button */}
             <Button
               type='submit'
               disabled={form.formState.isSubmitting}

@@ -53,17 +53,18 @@ export default function ExamResults({
     <div className='min-h-screen bg-gray-50'>
       <div className='max-w-7xl mx-auto p-6'>
         <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
-
+          {/* card */}
           <div className='lg:col-span-1'>
             <Card className='h-fit'>
               <CardHeader>
+                {/* card title */}
                 <CardTitle className='text-blue-600 font-mono text-xl'>Results:</CardTitle>
               </CardHeader>
               <CardContent className='text-center'>
-
+                {/* svg */}
                 <div className='relative inline-block mb-6'>
                   <svg width='200' height='200' className='transform -rotate-90'>
-
+                    {/* correct circle */}
                     <circle
                       cx='100'
                       cy='100'
@@ -73,6 +74,7 @@ export default function ExamResults({
                       strokeWidth='16'
                     />
 
+                    {/* incorrect circle */}
                     <circle
                       cx='100'
                       cy='100'
@@ -85,6 +87,7 @@ export default function ExamResults({
                       className='transition-all duration-1000 ease-out'
                     />
 
+                    {/* incorrect circle */}
                     {incorrectCount > 0 && (
                       <circle
                         cx='100'
@@ -101,6 +104,7 @@ export default function ExamResults({
                     )}
                   </svg>
 
+                  {/* score */}
                   <div className='absolute inset-0 flex items-center justify-center'>
                     <div className='text-center'>
                       <div className='text-3xl font-bold text-gray-800'>{percentage}%</div>
@@ -109,7 +113,7 @@ export default function ExamResults({
                   </div>
                 </div>
 
-
+                {/* correct and incorrect */}
                 <div className='space-y-3'>
                   <div className='flex items-center justify-center space-x-2'>
                     <div className='w-4 h-4 bg-green-500 rounded'></div>
@@ -121,7 +125,7 @@ export default function ExamResults({
                   </div>
                 </div>
 
-
+                {/* total questions, correct answers, incorrect answers, accuracy */}
                 <div className='mt-6 space-y-2 text-sm'>
                   <div className='flex justify-between'>
                     <span>Total Questions:</span>
@@ -143,12 +147,10 @@ export default function ExamResults({
               </CardContent>
             </Card>
           </div>
-
-
         </div>
 
-
         <div className='mt-6 flex justify-center'>
+          {/* back to exams button */}
           <Button
             onClick={onGoBack}
             className='px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200'

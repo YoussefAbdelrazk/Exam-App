@@ -24,13 +24,14 @@ export default function Navbar() {
   return (
     <header className='bg-white border-b border-gray-200 px-6 py-4 font-geist-mono'>
       <div className='flex items-center justify-between'>
+        {/* loader */}
         {isLoading ? (
           <div className='flex items-center justify-end w-full'>
             <Loader2 className='h-6 w-6 animate-spin text-gray-500' />
           </div>
         ) : (
           <div className='flex items-center space-x-4 justify-end w-full'>
-            {/* User menu */}
+            {/* user menu */}
             <DropdownMenu>
               <DropdownMenuTrigger className='flex items-center space-x-3 text-sm'>
                 <div className='flex items-center space-x-3'>
@@ -58,9 +59,6 @@ export default function Navbar() {
                   <span>Settings</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                {/* <DropdownMenuItem onClick={handleLogout}>
-                <span>Sign out</span>
-              </DropdownMenuItem> */}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>

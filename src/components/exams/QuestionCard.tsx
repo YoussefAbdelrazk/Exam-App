@@ -44,7 +44,9 @@ export default function QuestionCard({
         <Header title={examTitle} icon={<CircleQuestionMark />} />
 
         <div className='flex items-center justify-between text-gray-500 mt-8'>
+          {/* exam title */}
           <div className='text-sm  mb-4'> {examTitle} </div>
+          {/* question number */}
           <div className='text-right mb-6'>
             <span className='text-lg font-medium '>
               Question {questionNumber} of {totalQuestions}
@@ -53,10 +55,12 @@ export default function QuestionCard({
         </div>
 
         <div className='bg-white rounded-lg shadow-lg p-8 mb-6 relative'>
+          {/* question */}
           <h2 className='text-2xl font-semibold text-blue-600 mb-8 pr-16 font-geist-mono'>
             {question.question}
           </h2>
 
+          {/* answers */}
           <div className='space-y-4 mb-8'>
             {question.answers.map((answer: Answer) => (
               <label
@@ -65,6 +69,7 @@ export default function QuestionCard({
                   selectedAnswer === answer.key ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
                 }`}
               >
+                {/* input */}
                 <input
                   type='radio'
                   name={`question-${question._id}`}
@@ -73,6 +78,7 @@ export default function QuestionCard({
                   onChange={() => onAnswerSelect(question._id, answer.key)}
                   className='sr-only'
                 />
+                {/* div */}
                 <div
                   className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                     selectedAnswer === answer.key
@@ -80,10 +86,12 @@ export default function QuestionCard({
                       : 'border-gray-300'
                   }`}
                 >
+                  {/* selected answer */}
                   {selectedAnswer === answer.key && (
                     <div className='w-2 h-2 bg-white rounded-full'></div>
                   )}
                 </div>
+                {/* answer */}
                 <span className='text-lg text-gray-700'>{answer.answer}</span>
               </label>
             ))}
@@ -92,6 +100,7 @@ export default function QuestionCard({
 
         <div className='bg-white rounded-lg shadow-lg p-6'>
           <div className='flex items-center gap-4 justify-between'>
+            {/* previous button */}
             <button
               onClick={onPrevious}
               disabled={!canGoPrevious}
@@ -105,11 +114,13 @@ export default function QuestionCard({
               <span>Previous</span>
             </button>
 
+            {/* time */}
             <div className='flex items-center space-x-2 bg-blue-100 p-3 rounded-full'>
               <Clock className='h-5 w-5 text-blue-600' />
               <span className='text-blue-600 font-bold text-lg'>{formatTime(timeLeft)}</span>
             </div>
 
+            {/* next button */}
             <button
               onClick={onNext}
               className='px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center space-x-2 w-full justify-center'

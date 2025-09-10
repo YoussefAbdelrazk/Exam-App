@@ -56,7 +56,11 @@ export default function Sidebar() {
         {/* Navigation */}
         <nav className='mt-8 px-4'>
           <ul className='space-y-2'>
+            {/* navigation */}
             {navigation.map(item => {
+              {
+                /* is active */
+              }
               const isActive = pathname === item.href;
               return (
                 <li key={item.name}>
@@ -70,9 +74,11 @@ export default function Sidebar() {
                     )}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
+                    {/* icon */}
                     <item.icon
                       className={cn('mr-3 h-5 w-5', isActive ? 'text-blue-700' : 'text-gray-400')}
                     />
+                    {/* name */}
                     {item.name}
                   </Link>
                 </li>

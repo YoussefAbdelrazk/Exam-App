@@ -19,33 +19,38 @@ export const loginApi = async (data: LoginSchemeType) => {
   await setToken(response.data.token);
   return response.data;
 };
-
+//  signup api
 export const signupApi = async (data: SignupSchemeType) => {
   const api = await axiosInstance();
   const response = await api.post('/api/v1/auth/signup', data);
   return response.data;
 };
 
+//  forget password api
 export const forgetPasswordApi = async (data: ForgotSchemeType) => {
   const api = await axiosInstance();
   const response = await api.post('/api/v1/auth/forgotPassword', data);
   return response.data;
 };
 
+//  verify reset code api
 export const verifyResetCodeApi = async (data: verifySchemaType) => {
   const api = await axiosInstance();
   const response = await api.post('/api/v1/auth/verifyResetCode', data);
   return response.data;
 };
 
+//  reset password api
 export const resetPasswordApi = async (data: ResetPassSchemaType) => {
   const api = await axiosInstance();
   const response = await api.put('/api/v1/auth/resetPassword', data);
   return response.data;
 };
 
-export const deleteAccountApi = async () => {
-  const api = await axiosInstance();
-  const response = await api.delete('/api/v1/auth/deleteMe');
-  return response.data;
-};
+//  delete account api
+  export const deleteAccountApi = async () => {
+    const api = await axiosInstance();
+    //  delete account api
+    const response = await api.delete('/api/v1/auth/deleteMe');
+    return response.data;
+  };

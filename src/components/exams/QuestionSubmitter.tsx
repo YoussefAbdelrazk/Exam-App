@@ -148,22 +148,26 @@ export default function QuestionSubmitter({
   return (
     <Card className='bg-blue-50 border-blue-200'>
       <CardHeader>
+        {/* card title */}
         <CardTitle className='text-blue-800 flex items-center gap-2'>
           <AlertCircle className='h-6 w-6' />
           Submit Exam
         </CardTitle>
       </CardHeader>
       <CardContent>
+        {/* p */}
         <p className='text-blue-700 mb-4'>
           You have answered {Object.keys(userAnswers).length} out of {questions.length} questions.
         </p>
 
+        {/* error */}
         {error && (
           <div className='bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded mb-4'>
             {error}
           </div>
         )}
 
+        {/* button */}
         <Button
           onClick={handleSubmit}
           disabled={isLoading || Object.keys(userAnswers).length === 0}

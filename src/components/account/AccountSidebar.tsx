@@ -1,4 +1,6 @@
+'use client';
 import { Button } from '@/components/ui/button';
+import { useLogout } from '@/hooks/Authhooks/logouthook';
 import { Lock, User } from 'lucide-react';
 import Link from 'next/link';
 
@@ -15,6 +17,7 @@ const navigation = [
   },
 ];
 export default function AccountSidebar() {
+  const { mutate: logout } = useLogout();
   return (
     <div className='w-72 bg-wihte  border-r border-gray-200 min-h-screen flex flex-col'>
       <nav className='mt-4 px-4 flex-1'>
@@ -32,7 +35,11 @@ export default function AccountSidebar() {
           ))}
         </ul>
       </nav>
-      <Button className='w-full bg-red-500 text-white'>Logout</Button>
+
+      {/* logout button */}
+      <Button className='w-full bg-red-500 text-white' onClick={() => logout()}>
+        Logout
+      </Button>
     </div>
   );
 }

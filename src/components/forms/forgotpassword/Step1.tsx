@@ -46,11 +46,14 @@ export default function Step1({ onNext }: Step1Props) {
 
   return (
     <div className='space-y-6 max-w-[720px]'>
+      {/* form */}
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
+        {/* title */}
         <h2 className='text-2xl font-bold text-gray-800'>Forgot Password</h2>
         <p className='text-gray-500  max-w-[452px] '>
           Don’t worry, we will help you recover your account.
         </p>
+        {/* email */}
         <div className='space-y-2'>
           <Label htmlFor='email'>Email Address</Label>
           <Input
@@ -63,6 +66,7 @@ export default function Step1({ onNext }: Step1Props) {
           {errors.email && <p className='text-red-500 text-sm'>{errors.email.message}</p>}
         </div>
 
+        {/* send reset code button */}
         <Button type='submit' className='w-full bg-blue-600 text-white' disabled={isLoading}>
           {isLoading ? 'Sending...' : 'Send Reset Code'}
           <ArrowRight className='w-4 h-4' />

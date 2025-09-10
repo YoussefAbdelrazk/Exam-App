@@ -64,16 +64,21 @@ export default function Step3({ email, onSuccess, onBack }: Step3Props) {
 
   return (
     <div className='space-y-6'>
+      {/* back button */}
       <Button variant='outline' className='' onClick={onBack}>
         <ArrowLeft className='w-4 h-4' />
       </Button>
 
       <form onSubmit={handleSubmit(onSubmit)} className='space-y-4'>
+        {/* title */}
         <h2 className='text-2xl font-bold text-gray-800'>Create a new password</h2>
+        {/* description */}
         <p>Create a new strong password for your account.</p>
+        {/* hidden input */}
         <input type='hidden' {...register('email')} />
 
         <div className='space-y-2'>
+          {/* new password */}
           <Label htmlFor='newPassword'>New Password</Label>
           <div className='relative'>
             <Input
@@ -83,6 +88,7 @@ export default function Step3({ email, onSuccess, onBack }: Step3Props) {
               {...register('newPassword')}
               className={errors.newPassword ? 'border-red-500 pr-10' : 'pr-10'}
             />
+            {/* show password button */}
             <button
               type='button'
               className='absolute inset-y-0 right-0 pr-3 flex items-center'
@@ -95,11 +101,13 @@ export default function Step3({ email, onSuccess, onBack }: Step3Props) {
               )}
             </button>
           </div>
+          {/* error message */}
           {errors.newPassword && (
             <p className='text-red-500 text-sm'>{errors.newPassword.message}</p>
           )}
         </div>
 
+        {/* confirm new password */}
         <div className='space-y-2'>
           <Label htmlFor='confirmPassword'>Confirm New Password</Label>
           <div className='relative'>
@@ -112,6 +120,7 @@ export default function Step3({ email, onSuccess, onBack }: Step3Props) {
               })}
               className={errors.confirmPassword ? 'border-red-500 pr-10' : 'pr-10'}
             />
+            {/* show confirm password button */}
             <button
               type='button'
               className='absolute inset-y-0 right-0 pr-3 flex items-center'
@@ -124,21 +133,14 @@ export default function Step3({ email, onSuccess, onBack }: Step3Props) {
               )}
             </button>
           </div>
+          {/* error message */}
           {errors.confirmPassword && (
             <p className='text-red-500 text-sm'>{errors.confirmPassword.message}</p>
           )}
         </div>
 
-        {/* <div className='text-sm text-gray-600'>
-          <p>Password must:</p>
-          <ul className='list-disc list-inside mt-1 space-y-1'>
-            <li>Be at least 8 characters long</li>
-            <li>Contain uppercase and lowercase letters</li>
-            <li>Include at least one number</li>
-          </ul>
-        </div> */}
-
         <div className='space-y-3'>
+          {/* reset password button */}
           <Button type='submit' className='w-full bg-blue-600 text-white' disabled={isLoading}>
             {isLoading ? 'Resetting...' : 'Reset Password'}
           </Button>

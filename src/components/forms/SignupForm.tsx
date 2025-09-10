@@ -64,9 +64,11 @@ export default function SignupForm() {
   return (
     <div className='w-full max-w-md mx-auto py-6 px-6'>
       <h2 className='text-2xl font-semibold text-gray-800 capitalize mb-5'>Create an account</h2>
+      {/* form */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-4'>
           <div className='grid grid-cols-2 gap-4'>
+            {/* first name */}
             <FormField
               control={form.control}
               name='firstName'
@@ -80,6 +82,7 @@ export default function SignupForm() {
                 </FormItem>
               )}
             />
+            {/* last name */}
             <FormField
               control={form.control}
               name='lastName'
@@ -94,6 +97,7 @@ export default function SignupForm() {
               )}
             />
           </div>
+          {/* username */}
           <FormField
             control={form.control}
             name='username'
@@ -107,6 +111,7 @@ export default function SignupForm() {
               </FormItem>
             )}
           />
+          {/* email */}
           <FormField
             control={form.control}
             name='email'
@@ -120,6 +125,7 @@ export default function SignupForm() {
               </FormItem>
             )}
           />
+          {/* phone */}
           <FormField
             control={form.control}
             name='phone'
@@ -133,6 +139,7 @@ export default function SignupForm() {
               </FormItem>
             )}
           />
+          {/* password */}
           <FormField
             control={form.control}
             name='password'
@@ -165,6 +172,7 @@ export default function SignupForm() {
               </FormItem>
             )}
           />
+          {/* confirm password */}
           <FormField
             control={form.control}
             name='rePassword'
@@ -198,9 +206,11 @@ export default function SignupForm() {
             )}
           />
 
+          {/* signup button */}
           <Button type='submit' className='w-full bg-blue-600 text-white'>
             Signup
           </Button>
+          {/* login */}
           <div className='flex justify-center mt-4'>
             <p className='text-gray-700 text-sm'>
               Already have an account?{' '}
